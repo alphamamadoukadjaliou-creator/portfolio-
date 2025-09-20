@@ -32,30 +32,43 @@ document.getElementById("contactForm").addEventListener("submit", e => {
   alert("Message envoyé !");
 });
 // Gestion du formulaire avec confirmation
-const form = document.querySelector(".contact-form");
-const statusTxt = document.getElementById("form-status");
+document.getElementById("formulaire-de-contact").addEventListener("submit", e => {
+    e.preventDefault(); // Empêche l'envoi normal
+    alert("Message envoyé !");
+});
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const formData = {
-    nom: form.nom.value,
-    email: form.email.value,
-    message: form.message.value
-  };
+// Gestion du formulaire avec confirmation
+const formulaire = document.querySelector(".formulaire-de-contact");
+const statutTxt = document.getElementById("formulaire-statut");
 
-  const response = await fetch(form.action, {
-    method: form.method,
-    body: JSON.stringify(formData),
-    headers: { 
-      "Content-Type": "application/json",
-      "Accept": "application/json"
+formulaire.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    // Récupération des valeurs du formulaire
+    const donneesFormulaire = {
+        nom: formulaire.nom.value,
+        email: formulaire.email.value,
+        message: formulaire.message.value
+    };
+
+    try {
+        const reponse = await fetch(formulaire.action, {
+            method: formulaire.method,
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(donneesFormulaire) //  conversion en JSON
+        });
+
+        if (reponse.ok) {
+            statutTxt.innerHTML = " Message envoyé avec succès !";
+            formulaire.reset();
+        } else {
+            statutTxt.innerHTML = " Erreur lors de l'envoi.";
+        }
+    } catch (error) {
+        statutTxt.innerHTML = " Problème de connexion.";
+        console.error(error);
     }
-  });
-
-  if (response.ok) {
-    statusTxt.textContent = "✅ Message envoyé avec succès !";
-    form.reset();
-  } else {
-    statusTxt.textContent = "❌ Une erreur est survenue, réessayez.";
-  }
 });
