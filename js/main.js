@@ -36,11 +36,19 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") closeMenu();
 });
 
-// ---------- Thème sombre / clair (mémorisé) ----------
+// ---------- Thème jour / nuit (jour par défaut, choix mémorisé) ----------
+const updateThemeLabel = () => {
+  const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+  themeToggle.setAttribute("aria-label", isDark ? "Activer le mode jour" : "Activer le mode nuit");
+  themeToggle.title = isDark ? "Mode jour" : "Mode nuit";
+};
+updateThemeLabel();
+
 themeToggle.addEventListener("click", () => {
   const root = document.documentElement;
-  const next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
+  const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
   root.setAttribute("data-theme", next);
+  updateThemeLabel();
   try {
     localStorage.setItem("theme", next);
   } catch (e) {

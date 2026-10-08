@@ -362,15 +362,16 @@ strong {
   height: 20px;
 }
 
+/* L'icône montre le mode vers lequel on bascule : lune en mode jour, soleil en mode nuit */
 .icon-sun {
   display: none;
 }
 
-[data-theme="light"] .icon-sun {
+[data-theme="dark"] .icon-sun {
   display: block;
 }
 
-[data-theme="light"] .icon-moon {
+[data-theme="dark"] .icon-moon {
   display: none;
 }
 
@@ -542,7 +543,7 @@ strong {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 30%;
+  object-position: center 25%;
   border-radius: 27px;
 }
 
