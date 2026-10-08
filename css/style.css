@@ -593,14 +593,6 @@ strong {
   margin-top: 18px;
 }
 
-/* Phrase d'accroche, plus grande et en couleur principale */
-.about-text .about-intro {
-  font-family: var(--font-title);
-  font-size: clamp(1.25rem, 2.4vw, 1.5rem);
-  font-weight: 600;
-  line-height: 1.4;
-  color: var(--text);
-}
 
 .interests {
   display: flex;
